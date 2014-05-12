@@ -1,0 +1,17 @@
+.yes {
+  background: #86F8AB;
+}
+.no {
+  background: red;
+}
+.maybe {
+  background: gold;
+}
+.code-alongside-wrap {
+  overflow: auto;
+}
+.code-alongside-wrap div, .code-alongside-wrap code {
+  float: left;
+  width: 50%;
+  font-size: 1.75rem;
+}
