@@ -4,11 +4,11 @@
   background: rgba(0,0,0,0.1);
   border: 0;
   border-top: 1px solid rgba(0,0,0,0.5);
-  padding: 0.25rem;
 }
 .little-console input, .little-console code {
   font-size: 1rem;
   font-family: monospace;
+  padding: 0.25rem;
 }
 .little-console .error {
   color: rgb(200,20,20);
@@ -18,6 +18,7 @@
   height: 5em;
   overflow: scroll;
   display: block;
+  background: rgba(0,0,0,0.025);
 }
 .little-console .result {
   color: #888;

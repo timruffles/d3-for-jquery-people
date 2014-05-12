@@ -15,3 +15,7 @@
   width: 50%;
   font-size: 1.75rem;
 }
+.code-alongside-wrap code {
+  text-align: left;
+  white-space: pre-wrap;
+}

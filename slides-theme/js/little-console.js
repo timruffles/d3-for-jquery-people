@@ -69,6 +69,7 @@ ConsoleInput.prototype = {
       this.fire("command",this.inputEl.value);
       this.inputEl.value = "";
       this.offset = 0;
+      this.inputEl.scrollByPages(100);
     }
   },
   handleKey: function(evt) {
@@ -123,7 +124,7 @@ Results.prototype = {
 
     this.el.appendChild(el);
     this.el.appendChild(resultEl);
-    this.el.scrollTop = this.el.clientHeight;
+    this.el.scrollTop = this.el.scrollHeight;
   }
 }
 mixin(Results.prototype,evts);
@@ -149,7 +150,9 @@ Commands.prototype = {
     if(!cmd.error) {
       cmd.result = this.result;
     }
-    this._cmds.push(cmd);
+    if(!this._cmds[0] || this._cmds[this._cmds.length - 1].command != cmd.command) {
+      this._cmds.push(cmd);
+    }
     this.fire("command",cmd);
   }
 }

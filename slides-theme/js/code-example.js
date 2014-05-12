@@ -23,12 +23,24 @@ function revealAlongsideEl(src) {
   var div = document.createElement("div");
   div.innerHTML = src.innerHTML;
   var el = document.createElement("code");
-  el.innerText = src.innerHTML;
+  el.innerText = cleanWs(src.innerHTML);
 
   wrap.appendChild(el);
   wrap.appendChild(div);
 
   src.parentElement.insertBefore(wrap,src);
+}
+
+function cleanWs(src) {
+  var lines = src.split("\n");
+  var wsLength = lines.map(function(l) {
+    var ws = /^\s+(?=\S)/.exec(l);
+    return ws ? ws[0].length : Infinity;
+  });
+  var trim = Math.min.apply(null,wsLength);
+  return lines.map(function(x) {
+    return x.slice(trim);
+  }).join("\n");
 }
 
 function forEachEl(fn,selector) {
