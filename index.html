@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Introduction to D3</title>
+  
+    <link rel="stylesheet" href="reveal/css/reveal.min.css">
+    <link rel="stylesheet" href="reveal/lib/css/github.css">
+
+    <link rel="stylesheet" href="slides-theme/style.css" id="theme">
+    <link rel="stylesheet" href="slides-theme/talk-specific.css" id="theme">
+    <link rel="stylesheet" href="visualisations/visualisations.css" id="theme">
+
+    <link rel="stylesheet" href="slides-theme/js/little-console.css" id="theme">
+</head>
+
+<body>
+
+<div class="reveal">
+<div class="slides">
+
+<section data-markdown><script type="text/template">
+# D3 eye for jQuery guy*
+## *or girl
+[@timruffles](http://twitter.com/timruffles)
+[SidekickJS](https://www.sidekickjs.com)
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Why D3?
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Designers
+</script></section>
+
+<section data-markdown><script type="text/template">
+## TODO - story about fighting highcharts
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## D3 is familiar
+</script></section>
+
+<section>
+<script type=code-example-alongside>
+  <h3 id='heady'>Hi</h3>
+  <a href=''>jQuery</a>
+  <a href=''>MDN docs</a>
+</script>
+<div class=little-console></div>
+</section>
+
+
+<section data-markdown data-state=title><script type="text/template">
+## BYOK
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Built on existing APIs
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Knowledge of HTML, CSS, SVG & rest of DOM
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## Interactivity
+</script></section>
+
+<section>
+
+  <h3>Interaction</h3>
+  <p>We'd like to listen to this form being submitted</p>
+  <script type=code-example-alongside>
+    <form id=interaction>
+      <label>Filter: <input type=search></label>
+    </form>
+  </script>
+  <div class=little-console></div>
+
+</section>
+
+<section data-markdown data-state=title><script type="text/template">
+## The heart of D3
+</script></section>
+
+<section data-markdown><script type="text/template">
+## D3's callback
+
+```javascript
+d3.style("color",function(dataForElement,indexOfData) {
+  return dataForElement.alert ? "red" : "green";
+});
+```
+</script></section>
+
+<section data-markdown><script type="text/template">
+## `(data,...) {`
+
+- the data for an element
+</script></section>
+
+<section data-markdown><script type="text/template">
+## `(...,index) {`
+
+- where that data sits within the current data-set (order)
+</script></section>
+
+<section data-markdown><script type="text/template">
+## D3's dynamic presentation via this API
+```javascript
+function(data,index) {
+  // return value from data + index 
+}
+```
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## ...and where does the data come from?
+</script></section>
+
+<section data-markdown><script type="text/template">
+## `data()`
+
+```javascript
+// make a selection, then call data()
+d3.selectAll("h3")
+  .data([
+    {title: "jQuery"},
+    {title: "D3"}
+  ])
+  // now data can be related one-to-one with elements
+```
+</script></section>
+
+<section>
+
+  <h3>Driving the document with data</h3>
+  <script type=code-example-alongside>
+    <h3 class=drive-me></h3>
+    <h3 class=drive-me></h3>
+  </script>
+  <div class=little-console></div>
+
+</section>
+
+
+<section data-markdown ><script type="text/template">
+# Any other questions?
+## @timruffles, @sidekicksrc
+</script></section>
+
+
+</div>
+</div>
+
+
+<script src=vendor/d3.js></script>
+<script src=visualisations/venn.js></script>
+<script src=visualisations/comparison-bars.js></script>
+<script src=visualisations/presentation-visualisations.js></script>
+
+<script src=slides-theme/js/code-example.js></script>
+<script>
+  var revealCodeSamples = codeExamples.revealAlongside.bind(null,"script[type=code-example-alongside]");
+</script>
+
+<script src=slides-theme/js/little-console.js></script>
+<script>
+  function showConsoles() {
+    LittleConsole.forEls(document.querySelectorAll(".little-console"))
+  }
+</script>
+
+<script src="reveal/lib/js/head.min.js"></script>
+<script src="reveal/js/reveal.min.js"></script>
+<script>
+  Reveal.initialize({
+
+    // Display controls in the bottom right corner
+    controls: false,
+
+    // Display a presentation progress bar
+    progress: true,
+
+    // Push each slide change to the browser history
+    history: true,
+
+    // Enable keyboard shortcuts for navigation
+    keyboard: true,
+
+    // Enable the slide overview mode
+    overview: true,
+
+    // Vertical centering of slides
+    center: false,
+
+    // Loop the presentation
+    loop: false,
+
+    // Change the presentation direction to be RTL
+    rtl: false,
+
+    // Number of milliseconds between automatically proceeding to the
+    // next slide, disabled when set to 0, this value can be overwritten
+    // by using a data-autoslide attribute on your slides
+    autoSlide: 0,
+
+    // Enable slide navigation via mouse wheel
+    mouseWheel: false,
+
+    // Apply a 3D roll to links on hover
+    rollingLinks: false,
+
+    // Transition style
+    transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+    dependencies: [
+        // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+        { src: 'reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+
+        // Interreveal/pret Markdown in <section> elements
+        { src: 'reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        { src: 'reveal/plugin/markdown/markdown.js', 
+          condition: function() { return !!document.querySelector( '[data-markdown]' ); },
+          callback: function() {
+            revealCodeSamples(); 
+            showConsoles();
+          } },
+
+        // Syntareveal/x highlight for <code> elements
+        { src: 'reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+
+        // Zoom reveal/in and out with Alt+click
+        { src: 'reveal/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // Speakreveal/er notes
+        { src: 'reveal/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // Remotreveal/e control your reveal.js presentation using a touch device
+        // { src: 'reveal/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+    ]
+
+  });
+</script>
+</body>
+
+
