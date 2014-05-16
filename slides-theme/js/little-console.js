@@ -75,7 +75,6 @@ ConsoleInput.prototype = {
       this.fire("command",this.inputEl.value);
       this.inputEl.value = "";
       this.offset = 0;
-      this.inputEl.scrollByPages(100);
     }
   },
   setCommand: function(cmd) {
@@ -133,7 +132,11 @@ Results.prototype = {
 
     this.el.appendChild(el);
     this.el.appendChild(resultEl);
-    this.el.scrollTop = this.el.scrollHeight;
+    // workaround bug where first element is squashed
+    // after scroll, can only see 2nd until scroll changed
+    setTimeout(function() {
+      this.el.scrollTop = this.el.scrollHeight;
+    }.bind(this));
   }
 }
 mixin(Results.prototype,evts);

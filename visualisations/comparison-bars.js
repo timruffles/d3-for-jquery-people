@@ -5,7 +5,7 @@ var comparisons = {
     var ctrlsEl = demoEl
       .append("div")
       .classed("ctrls",true)
-    ctrlsEl.append("h2").text("Best at")
+    ctrlsEl.append("h2").text("Library best for")
     ctrlsEl.append("div")
           .classed("radios",true)
 
@@ -14,17 +14,17 @@ var comparisons = {
     
      var data = [
       {"name":"jquery", data: [["dom",1], ["svg",0], ["data",0], ["open",0.7 ]]},
-      {"name":"d3", data: [ ["dom",0.6], ["svg",1], ["data",1], ["open",1 ]]},
+      {"name":"d3", data: [ ["dom",0.4], ["svg",1], ["data",1], ["open",1 ]]},
       {"name":"highcharts", data:[ ["dom",0], ["svg",0.1], ["data",0.6], ["open",0 ]]},
       {"name":"raphael", data: [["dom",0], ["svg",1], ["data",0], ["open",0.5 ]]},
       {"name":"processing", data:[ ["dom",0], ["svg",0], ["data",0.5], ["open",0.2 ]]}
     ];
 
     var titles = {
-      open: "Uses existing APIs",
+      open: "Using existing APIs",
       dom: "DOM tools",
       svg: "SVG tools",
-      data: "Facilities for working with data"
+      data: "Working with data"
     };
 
     var reorder;

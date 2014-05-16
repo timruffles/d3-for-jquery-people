@@ -23,7 +23,7 @@
 <div class="slides">
 
 <section data-markdown><script type="text/template">
-# D3 eye for jQuery guy*
+# D3 eye for the jQuery guy*
 ## *or girl
 [@timruffles](http://twitter.com/timruffles)
 [SidekickJS](https://www.sidekickjs.com)
@@ -86,11 +86,23 @@
 </script></section>
 
 <section data-markdown><script type="text/template">
+## Let's rerun the story with D3
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## Why is it so good?
+</script></section>
+
+<section data-markdown><script type="text/template">
 ## Primitives for rolling your own
 </script></section>
 
 <section data-markdown><script type="text/template">
 ## No pre-made visualisations
+</script></section>
+
+<section data-markdown><script type="text/template">
+## No proprietary APIs, thin wrapper over DOM
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -435,7 +447,7 @@ var update = d3.selectAll("p")
       <h3 class=code>.data()</h3>
       <div class='data track'></div>
       <button class=addData>Add data</button>
-      <button class=delData>Remove element</button>
+      <button class=delData>Remove data</button>
     </div>
 
     <div class=contexts>
@@ -528,7 +540,7 @@ function viz(rootEl,data) {
 </script></section>
 
 <section data-markdown><script type="text/template">
-## 1. Familar:
+## 1. Familiar:
 - DOM + $() + 1 callback
 </script></section>
 
@@ -600,7 +612,7 @@ function viz(rootEl,data) {
 <script src=vendor/d3.js></script>
 
 <script src=visualisations/comparison-bars.js></script>
-<script>comparisons.run(document.getElementById(".contexts-explained"));</script>
+<script>comparisons.run(document.getElementById("comparisons"));</script>
 
 <script src=visualisations/d3-contexts-explained.js></script>
 <script>explainContexts(document.querySelector(".contexts-explained"));</script>

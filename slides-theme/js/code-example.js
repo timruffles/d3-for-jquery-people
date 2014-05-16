@@ -32,7 +32,9 @@ function revealAlongsideEl(src) {
 }
 
 function cleanWs(src) {
-  var lines = src.split("\n");
+  var lines = src.split("\n").filter(function(l) {
+    return !/^\s*$/.test(l);
+  });
   var wsLength = lines.map(function(l) {
     var ws = /^\s+(?=\S)/.exec(l);
     return ws ? ws[0].length : Infinity;
