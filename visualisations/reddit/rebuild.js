@@ -42,9 +42,9 @@ function vis(el,dataRoot) {
   var entered;
   
   // for update + enter
-  // - set the .leaf class on leaves
   // - position the group
   // - size the circle
+  // - set the .leaf class on leaves
 
     
   // exit - remove nodes
