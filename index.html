@@ -64,6 +64,21 @@
 ## Knowledge of HTML, CSS, SVG & rest of DOM
 </script></section>
 
+
+<section>
+<h3>Learn about SVG in D3, use anywhere</h3>
+<script type=code-example-alongside>
+  <svg id=svg-eg width=400 height=200></svg>
+</script>
+<div class=little-console></div>
+<script type=cheat>
+  d3.select("#svg-eg")
+    .append("circle")
+    .attr({cx: 100,cy: 100,r: 50});
+</script>
+</section>
+
+
 <section data-markdown data-state=title><script type="text/template">
 ## Interactivity
 </script></section>
@@ -71,25 +86,45 @@
 <section>
 
   <h3>Interaction</h3>
-  <p>We'd like to listen to this form being submitted</p>
   <script type=code-example-alongside>
-    <form id=interaction>
-      <label>Filter: <input type=search></label>
-    </form>
+    <button id=clicky>I'm so good to click</button>
   </script>
   <div class=little-console></div>
 
 </section>
 
 <section data-markdown data-state=title><script type="text/template">
-## The heart of D3
+## Big idea #1
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## One callback turns jQ into D3
+</script></section>
+
+<section data-markdown><script type="text/template">
+## jQuery's callback
+
+```javascript
+// static value, same for all
+$(".bars")
+.css("background","red");
+```
+```javascript
+// callback to vary value for each
+$(".bars")
+.css("background",function(index,current) {
+  var el = this;
+  return $(this).data('alert') ? "red" : "green";
+});
+```
 </script></section>
 
 <section data-markdown><script type="text/template">
 ## D3's callback
 
 ```javascript
-d3.style("color",function(dataForElement,indexOfData) {
+d3.selectAll(".bars")
+.style("background",function(dataForElement,indexOfData) {
   return dataForElement.alert ? "red" : "green";
 });
 ```
@@ -108,11 +143,18 @@ d3.style("color",function(dataForElement,indexOfData) {
 </script></section>
 
 <section data-markdown><script type="text/template">
-## D3's dynamic presentation via this API
+## The bridge, el -> data
 ```javascript
 function(data,index) {
   // return value from data + index 
 }
+```
+```javascript
+d3.select("#root")
+  .selectAll("h3")
+  .text(function(d) {
+    return d.title;
+  });
 ```
 </script></section>
 
@@ -143,7 +185,190 @@ d3.selectAll("h3")
   </script>
   <div class=little-console></div>
 
+  <script type=cheat>
+    d3.selectAll(".drive-me").data([{title:"hi"},{title:"jquery"}]).text(function(d) { return d.title })
+  </script>
+
 </section>
+
+<section data-markdown ><script type="text/template">
+## Datums -> elements via key function
+</script></section>
+
+<section data-markdown ><script type="text/template">
+## `ƒ(d,i) { return d.id }` 
+
+- by default, just `{ return index }`
+</script></section>
+
+
+<section data-markdown ><script type="text/template">
+## Important - sorting
+
+// TODO sorting example
+</script></section>
+
+
+<section data-markdown data-state=title><script type="text/template">
+## Big idea #2
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## Visualisation as theatre
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Data can...
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Enter the stage
+- AJAX response, data ready to display
+- new price tick 
+- player appears on high-scores
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Act (update)
+- price increases
+- Reddit story voted down
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Exit the stage
+- player falls off high-score table
+- data filtered
+</script></section>
+
+<section data-markdown><script type="text/template">
+## We direct how our data
+
+- enters
+- updates
+- and exits (pursued by a bear)
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Context
+
+- We group our code for a given selection into 3 contexts
+- enter, update, exit
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Life-cycle of a D3 visualisation
+
+- make a selection of elements
+- get data onto stage via `enter()`
+- present changes in update context
+- controls removal via `exit()`
+</script></section>
+
+<section>
+  <h3>Enter</h3>
+  <script type=code-example-alongside>
+    <p>Empty and boring</p>
+    <div id=add-target></div>
+  </script>
+  <div class=little-console></div>
+  <script type=cheat>
+  </script>
+</section>
+
+<section data-markdown><script type="text/template">
+## `enter()`
+
+- all the items of data that don't have a corresponding element
+- `enter()` normally followed by `append()`
+</script></section>
+
+<section>
+  <h3>Update</h3>
+  <script type=code-example-alongside>
+    <div id=update>
+      <p>Static content</p>
+      <p>Me too</p>
+    </div>
+  </script>
+  <div class=little-console></div>
+  <script type=cheat>
+  </script>
+</section>
+
+<section data-markdown><script type="text/template">
+## Update
+
+- implicit - return value of `data()`
+- we have an existing element ready for the data
+
+```javascript
+var update = d3.selectAll("p")
+  .data(someData);
+```
+</script></section>
+
+
+<section>
+  <h3>Exit</h3>
+  <script type=code-example-alongside>
+    <div id=exit>
+      <p>I'm safe</p>
+      <p>I'm worried</p>
+    </div>
+  </script>
+  <div class=little-console></div>
+  <script type=cheat>
+  </script>
+</section>
+
+<section data-markdown><script type="text/template">
+## `exit()`
+
+- where we have more elements than data
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Contexts: sync viz with data
+
+# TODO context demo
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Shape of D3
+
+```javascript
+function viz(rootEl,data) {
+  var update = d3
+    .select(rootEl)
+    .selectAll(sel)
+    .data(data);
+
+  var enter = update.enter()
+    .append("circle");
+
+  var exit = update.exit()
+    .remove();
+}
+```
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## Let's build something!
+</script></section>
+
+<section>
+  <div id=reddit-pack-demo></div>
+  <script src=visualisation/reddit/vis.js></script>
+  <script>
+  redditPack(document.getElementById("reddit-pack-demo"),[
+    "/r/funny/comments/22r299/alcoholism_level_engineer.json",
+    "/r/pics/comments/25olyp/a_truly_dedicated_son.json",
+    "/r/mildlyinteresting/comments/25ofa4/i_can_give_my_fingers_faces_if_i_bite_on_them.json"
+  ]);
+  </script>
+</section>
+
 
 
 <section data-markdown ><script type="text/template">
