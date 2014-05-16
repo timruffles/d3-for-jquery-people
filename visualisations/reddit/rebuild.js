@@ -22,48 +22,32 @@ function vis(el,dataRoot) {
 
   var svg = d3.select(el).select('svg');
   
-  var diameter = Math.min(svg.attr("width"),svg.attr("height")) * 0.9;
+  // get diameter
+  var diameter;
 
-  var layout = d3.layout.pack()
-    .size([diameter, diameter])
-    .children(function(d) {
-      return d.replies
-    })
-    .value(function(d) {
-      return d.body.length;
-    });
+  // configure pack d3.layout.pack
+  // - size of whole layout
+  // - how to access children from data
+  // - how to decide size of item from data
+  var layout;
        
-  var nodes = svg.datum(dataRoot)
-     .selectAll(".story")
-     .data(layout.nodes);
+  // bind the root of tree to svg
+  // - and nodes to stories
+  var nodes;
   
-  var entered = nodes.enter()
-    .append("g")
-    .classed("story",true)
-    .attr("transform",function(d) {
-       return "translate(" + d.x + "," + d.y + ")"
-    })
-    .append("circle")
-    .attr("r",0);
+  // append a group to wrap each story
+  // - add the circle
+  var entered;
   
-  nodes
-     .classed("leaf",function(d) {
-       return d.replies.length === 0;
-     })
-     .transition()
-     .attr("transform",function(d) {
-       return "translate(" + d.x + "," + d.y + ")"
-     })
-     .select("circle")
-     .attr("r",function(d) {
-       return d.r
-     });
-    
-  nodes
-    .exit()
-    .remove();
-}
+  // for update + enter
+  // - set the .leaf class on leaves
+  // - position the group
+  // - size the circle
 
+    
+  // exit - remove nodes
+  var exit;
+}
 
 
 function getRedditStoryComments(url,cb) {

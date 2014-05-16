@@ -22,11 +22,12 @@
   #comparisons .graphs {
     margin-left: 2em;
     float: left;
+    font-size: 0.65em;
     width: 40%;
     height: 100%; }
   #comparisons .graph {
     float: left;
-    margin-bottom: 1em; }
+    margin-bottom: 0.5em; }
   #comparisons .bar { 
     padding: 0;
     height: 3em;

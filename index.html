@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="visualisations/visualisations.css" id="theme">
 
     <link rel="stylesheet" href="slides-theme/js/little-console.css" id="theme">
+
+    <link rel="stylesheet" href="visualisations/reddit/style.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="visualisations/d3-contexts-explained.css" type="text/css" media="screen" charset="utf-8">
 </head>
 
 <body>
@@ -31,29 +34,100 @@
 </script></section>
 
 <section data-markdown><script type="text/template">
-## Designers
+## Most charts are boring
 </script></section>
 
 <section data-markdown><script type="text/template">
-## TODO - story about fighting highcharts
+## Why?
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Designer produces...
+</script></section>
+
+<section data-markdown><script type="text/template">
+<img src=img/nice.png>
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Developer has 2 days to make it...
+</script></section>
+
+<section data-markdown><script type="text/template">
+<img src=img/charting-library.png>
+</script></section>
+
+<section data-markdown><script type="text/template">
+## "Ok designer, it's done! :)"
+</script></section>
+
+<section data-markdown><script type="text/template">
+<img src=img/nasty.png>
+</script></section>
+
+<section data-markdown><script type="text/template">
+<img src=img/ecce-homo.jpg >
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Why?
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Charting libraries
+
+- rigid
+- because they do everything for you
+- programming via options objects
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## D3 is different
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Primitives for rolling your own
+</script></section>
+
+<section data-markdown><script type="text/template">
+## No pre-made visualisations
+</script></section>
+
+<section data-markdown><script type="text/template">
+## No enforced structure to your data
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Freedom!
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## Big idea #1
 </script></section>
 
 <section data-markdown data-state=title><script type="text/template">
 ## D3 is familiar
 </script></section>
 
+<section data-markdown ><script type="text/template">
+## In jQ or d3 we...
+- select elements
+- work with that selection via chaining API
+</script></section>
+
 <section>
 <script type=code-example-alongside>
-  <h3 id='heady'>Hi</h3>
-  <a href=''>jQuery</a>
-  <a href=''>MDN docs</a>
+  <div id=familiar>
+    <h3>Hi</h3>
+    <a href=''>jQuery</a>
+    <a href=''>MDN docs</a>
+  </div>
 </script>
 <div class=little-console></div>
 </section>
 
-
 <section data-markdown data-state=title><script type="text/template">
-## BYOK
+## BYO Knowledge
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -63,7 +137,6 @@
 <section data-markdown><script type="text/template">
 ## Knowledge of HTML, CSS, SVG & rest of DOM
 </script></section>
-
 
 <section>
 <h3>Learn about SVG in D3, use anywhere</h3>
@@ -87,14 +160,24 @@
 
   <h3>Interaction</h3>
   <script type=code-example-alongside>
-    <button id=clicky>I'm so good to click</button>
+    <button id=clicky>
+      I'm so good to click
+    </button>
   </script>
   <div class=little-console></div>
 
+  <script type=cheat>
+    d3.select("#clicky").on("click",function() { alert("YAY!") });
+  </script>
+
 </section>
 
-<section data-markdown data-state=title><script type="text/template">
-## Big idea #1
+<section data-markdown><script type="text/template">
+## So what's different?
+</script></section>
+
+<section data-markdown><script type="text/template">
+## API focussed on data
 </script></section>
 
 <section data-markdown data-state=title><script type="text/template">
@@ -201,12 +284,13 @@ d3.selectAll("h3")
 - by default, just `{ return index }`
 </script></section>
 
+<section>
+<h2>El consistency vital for animation</h2>
+</section>
 
-<section data-markdown ><script type="text/template">
-## Important - sorting
-
-// TODO sorting example
-</script></section>
+<section>
+<div id=comparisons></div>
+</section>
 
 
 <section data-markdown data-state=title><script type="text/template">
@@ -330,9 +414,43 @@ var update = d3.selectAll("p")
 
 <section data-markdown><script type="text/template">
 ## Contexts: sync viz with data
-
-# TODO context demo
 </script></section>
+
+<section>
+
+  <div class=contexts-explained>
+
+    <div class=situation>
+      <h2>Selection</h2>
+      <h3>Elements</h3>
+      <div class='elements track'></div>
+      <button class=addEl>Add element</button>
+      <button class=delEl>Remove element</button>
+      <h3 class=code>.data()</h3>
+      <div class='data track'></div>
+      <button class=addData>Add data</button>
+      <button class=delData>Remove element</button>
+    </div>
+
+    <div class=contexts>
+      <h2>d3 Contexts</h2>
+      <div>
+        <h3 class=code>enter()</h3>
+        <div class='enter track'></div>
+      </div>
+      <div>
+        <h3>Update</h3>
+        <div class='update track'></div>
+      </div>
+      <div>
+        <h3 class=code>exit()</h3>
+        <div class='exit track'></div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
 
 <section data-markdown><script type="text/template">
 ## Shape of D3
@@ -358,23 +476,88 @@ function viz(rootEl,data) {
 </script></section>
 
 <section>
-  <div id=reddit-pack-demo></div>
-  <script src=visualisation/reddit/vis.js></script>
-  <script>
-  redditPack(document.getElementById("reddit-pack-demo"),[
-    "/r/funny/comments/22r299/alcoholism_level_engineer.json",
-    "/r/pics/comments/25olyp/a_truly_dedicated_son.json",
-    "/r/mildlyinteresting/comments/25ofa4/i_can_give_my_fingers_faces_if_i_bite_on_them.json"
-  ]);
-  </script>
+  <div class=reddit-pack id=reddit-pack-demo>
+    <div class=loading>Loading...</div>
+    <svg class=reddit-pack width=700 height=700></svg>
+  </div>
 </section>
 
+<section data-markdown><script type="text/template">
+## Here we go...
 
+- [Rebuild...](/anger-the-demo-gods)
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## Emptied the room?
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Three big ideas about d3
+</script></section>
+
+<section data-markdown><script type="text/template">
+## 1. Familar: DOM + $() + 1 callback
+</script></section>
+
+<section data-markdown><script type="text/template">
+## 2. Theatre: direct via contexts
+
+- update
+- enter
+- exit
+</script></section>
+
+<section data-markdown><script type="text/template">
+## 3. Rerun with new data for dynamic visualisations 
+- live data
+- filtering/formatting
+- interactivity
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## Freedom from rubbish charts!
+</script></section>
 
 <section data-markdown ><script type="text/template">
 # Any other questions?
-## @timruffles, @sidekicksrc
+### [@timruffles](http://twitter.com/timruffles), [@sidekicksrc](http://www.sidekickjs.com)
 </script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## Where next?
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Tutorials/talks etc
+
+- [From d3 wiki](https://github.com/mbostock/d3/wiki/Tutorials)
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Books
+
+<div class=gallery>
+  <img src=img/vis-quant.jpg height=500 style=float:left >
+  <div style=float:left>
+    <img src=img/information-is-beautiful.jpg height=250 >
+    <br>
+    <img src=img/taschen.jpg height=250 >
+  </div>
+</div>
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+## Blogs
+
+- [Flowing Data](http://flowingdata.com/)
+- [Guardian DataBlog](http://www.theguardian.com/news/datablog)
+- [Mike Bostock](http://bost.ocks.org/mike/)
+- [Indexed](http://thisisindexed.com/)
+
+</script></section>
+
 
 
 </div>
@@ -382,9 +565,12 @@ function viz(rootEl,data) {
 
 
 <script src=vendor/d3.js></script>
-<script src=visualisations/venn.js></script>
+
 <script src=visualisations/comparison-bars.js></script>
-<script src=visualisations/presentation-visualisations.js></script>
+<script>comparisons.run(document.getElementById(".contexts-explained"));</script>
+
+<script src=visualisations/d3-contexts-explained.js></script>
+<script>explainContexts(document.querySelector(".contexts-explained"));</script>
 
 <script src=slides-theme/js/code-example.js></script>
 <script>
@@ -396,6 +582,16 @@ function viz(rootEl,data) {
   function showConsoles() {
     LittleConsole.forEls(document.querySelectorAll(".little-console"))
   }
+</script>
+
+<!-- in slide demos -->
+<script src=visualisations/reddit/vis.js></script>
+<script>
+redditPack(document.getElementById("reddit-pack-demo"),[
+  "/r/funny/comments/22r299/alcoholism_level_engineer.json",
+  "/r/pics/comments/25olyp/a_truly_dedicated_son.json",
+  "/r/mildlyinteresting/comments/25ofa4/i_can_give_my_fingers_faces_if_i_bite_on_them.json"
+]);
 </script>
 
 <script src="reveal/lib/js/head.min.js"></script>

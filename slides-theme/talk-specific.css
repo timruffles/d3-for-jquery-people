@@ -19,3 +19,7 @@
   text-align: left;
   white-space: pre-wrap;
 }
+
+.gallery img {
+  margin-right: 15px; 
+}
