@@ -119,11 +119,14 @@
 <script type=code-example-alongside>
   <div id=familiar>
     <h3>Hi</h3>
-    <a href=''>jQuery</a>
-    <a href=''>MDN docs</a>
+    <a>jQuery</a>
+    <a>MDN docs</a>
   </div>
 </script>
 <div class=little-console></div>
+<script type=cheat>
+  d3.selectAll("#familiar a").attr("href","http://google.com");
+</script>
 </section>
 
 <section data-markdown data-state=title><script type="text/template">
@@ -357,6 +360,7 @@ d3.selectAll("h3")
   </script>
   <div class=little-console></div>
   <script type=cheat>
+    d3.select("#add-target").selectAll("p").data([{name:"jQuery"},{name:"UK"}]).enter().append("p").text(function(x) { return x.name });
   </script>
 </section>
 
@@ -377,6 +381,7 @@ d3.selectAll("h3")
   </script>
   <div class=little-console></div>
   <script type=cheat>
+    d3.selectAll("#update p").data([{name:"jQuery"},{name:"UK"}]).text(function(x) { return x.name });
   </script>
 </section>
 
@@ -403,6 +408,7 @@ var update = d3.selectAll("p")
   </script>
   <div class=little-console></div>
   <script type=cheat>
+    d3.selectAll("#exit p").data([{a:"b"}]).exit().remove()
   </script>
 </section>
 
@@ -607,7 +613,35 @@ function viz(rootEl,data) {
 <script src=slides-theme/js/little-console.js></script>
 <script>
   function showConsoles() {
-    LittleConsole.forEls(document.querySelectorAll(".little-console"))
+
+    // show all consoles, and register 'cheats'
+    var cheats = [];
+
+    ;[].forEach.call(document.querySelectorAll(".little-console"),function(el) {
+      var cmds = new LittleConsole.Commands;
+      var console = new LittleConsole({el: el,commands: cmds});
+      var slide = el.parentElement;
+      var cheat = slide.querySelector("[type=cheat]");
+      if(!cheat) return;
+      cheats.push({
+        console: console,
+        slide: slide,
+        src: cheat.innerHTML,
+      });
+    });
+
+    // listen for 'cheat code' - ALT + C, and fill input
+    var C = 67;
+    document.body.addEventListener("keyup",function(evt) {
+      if(evt.keyCode !== C || !evt.altKey) return;
+      var slide = Reveal.getCurrentSlide();
+      cheats.forEach(function(setup) {
+        if(setup.slide !== slide) return;
+        setup.console.setCommand(setup.src);
+      });
+
+    });
+
   }
 </script>
 

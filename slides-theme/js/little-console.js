@@ -11,6 +11,7 @@ api.forEls = function(els) {
 }
 
 window.LittleConsole = api;
+LittleConsole.Commands = Commands;
 
 
 // library
@@ -48,6 +49,11 @@ function LittleConsole(opts) {
   this.el.appendChild(this.results.el);
   this.el.appendChild(this.input.el);
 }
+LittleConsole.prototype = {
+  setCommand: function(cmd) {
+    this.input.setCommand(cmd);
+  }
+}
 
 
 function ConsoleInput(opts) {
@@ -71,6 +77,9 @@ ConsoleInput.prototype = {
       this.offset = 0;
       this.inputEl.scrollByPages(100);
     }
+  },
+  setCommand: function(cmd) {
+    this.inputEl.value = cmd;
   },
   handleKey: function(evt) {
     switch(evt.keyCode) {
@@ -142,6 +151,7 @@ Commands.prototype = {
   run: function(src) {
     var cmd = {command:src};
     var _ = this.result;
+    src = this.clean(src)
     try {
       this.result = eval(src);
     } catch(e) {
@@ -154,6 +164,9 @@ Commands.prototype = {
       this._cmds.push(cmd);
     }
     this.fire("command",cmd);
+  },
+  clean: function(src) {
+    return src.replace(/^\s*var /,"");
   }
 }
 mixin(Commands.prototype,evts);
