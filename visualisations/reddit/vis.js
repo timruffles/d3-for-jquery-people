@@ -22,7 +22,8 @@ function vis(el,dataRoot) {
 
   var svg = d3.select(el).select('svg');
   
-  var diameter = Math.min(svg.attr("width"),svg.attr("height")) * 0.9;
+  var diameter = Math.min(svg.attr("width"),svg.attr("height"))
+    * 0.9;
 
   var layout = d3.layout.pack()
     .size([diameter, diameter])
@@ -34,30 +35,28 @@ function vis(el,dataRoot) {
     });
        
   var nodes = svg.datum(dataRoot)
-     .selectAll(".story")
-     .data(layout.nodes);
+    .selectAll(".story")
+    .data(layout.nodes);
   
   var entered = nodes.enter()
     .append("g")
     .classed("story",true)
-    .attr("transform",function(d) {
-       return "translate(" + d.x + "," + d.y + ")"
-    })
+    .attr("transform","translate(0,0)")
     .append("circle")
     .attr("r",0);
   
   nodes
-     .classed("leaf",function(d) {
-       return d.replies.length === 0;
-     })
-     .transition()
-     .attr("transform",function(d) {
-       return "translate(" + d.x + "," + d.y + ")"
-     })
-     .select("circle")
-     .attr("r",function(d) {
-       return d.r
-     });
+    .classed("leaf",function(d) {
+      return d.replies.length === 0;
+    })
+    .transition()
+    .attr("transform",function(d) {
+      return "translate(" + d.x + "," + d.y + ")"
+    })
+    .select("circle")
+    .attr("r",function(d) {
+      return d.r
+    });
     
   nodes
     .exit()

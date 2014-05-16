@@ -20,6 +20,8 @@ function main(el,stories,index) {
 
 function vis(el,dataRoot) {
 
+  // data: {replies: [], body: ""}
+
   var svg = d3.select(el).select('svg');
   
   // get diameter
